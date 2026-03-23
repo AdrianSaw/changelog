@@ -24,3 +24,25 @@ export async function getCommits(repo) {
 
     return detailed;
 }
+
+export async function getRepoName(repo) {
+    try {
+        const res = await fetch(
+            `https://api.github.com/repos/${repo}/contents/package.json`
+        );
+
+        const data = await res.json();
+
+        if (!data.content) return null;
+
+        // GitHub zwraca base64
+        const decoded = Buffer.from(data.content, "base64").toString("utf-8");
+
+        const json = JSON.parse(decoded);
+
+        return json.name || null;
+    } catch (err) {
+        console.error("Cannot fetch package.json:", err);
+        return null;
+    }
+}

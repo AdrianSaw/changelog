@@ -4,11 +4,11 @@ import { cleanCommits } from "./utils.js";
 import { generateChangelog } from "./ai.js";
 import { sendEmail } from "./email.js";
 
-const repo =
-    process.env.REPO || "AdrianSaw/angular-15-dynamic-forms-starter";
+import { getRepoName } from "./github.js";
 
 async function main() {
-    console.log("Repo:", repo);
+    const repo =
+        process.env.REPO || "AdrianSaw/angular-15-dynamic-forms-starter";
 
     const commits = await getCommits(repo);
 
@@ -16,9 +16,9 @@ async function main() {
 
     const changelog = await generateChangelog(cleaned);
 
-    console.log(changelog);
+    const repoName = await getRepoName(repo);
 
-    await sendEmail(changelog);
+    await sendEmail(changelog, repo, repoName);
 }
 
 main();
