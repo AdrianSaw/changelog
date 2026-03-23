@@ -2,28 +2,34 @@ name: AI Changelog
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "0 7 * * *"
+    inputs:
+      repo:
+        description: "Repo (owner/name)"
+        required: true
+        default: "AdrianSaw/angular-15-dynamic-forms-starter"
 
 jobs:
   run:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repo
+      - name: 📥 Checkout repo
         uses: actions/checkout@v3
 
-      - name: Setup Node
+      - name: 🟢 Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: 20
 
-      - name: Install deps
+      - name: 📦 Install dependencies
         run: npm install
 
-      - name: Run script
+      - name: 🚀 Run script
         run: node src/index.js
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
           EMAIL_USER: ${{ secrets.EMAIL_USER }}
+
+          # 🔥 parametr repo
+          REPO: ${{ github.event.inputs.repo }}
