@@ -1,0 +1,19 @@
+{
+  "name": "ai-changelog",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.3.1",
+    "nodemailer": "^8.0.3",
+    "openai": "^6.32.0",
+    "resend": "^6.9.4"
+  }
+}
